@@ -13,7 +13,8 @@ customElements.define(
         private timeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
         private getCurrentPage() {
-            return this.slidePaths.indexOf(document.location.pathname.replace("/mpa-with-astro", ""));
+            const currentSlide = document.location.pathname.replace(/^\/mpa-with-astro/, "").replace(/\/$/, "");
+            return this.slidePaths.indexOf(currentSlide);
         }
 
         connectedCallback() {
