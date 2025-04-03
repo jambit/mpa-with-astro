@@ -10,6 +10,7 @@ const textFilter = createFilter('**/*.txt');
 
 // https://astro.build/config
 export default defineConfig({
+    base: '/mpa-with-astro',
     markdown: {
         shikiConfig: {
             themes: {
