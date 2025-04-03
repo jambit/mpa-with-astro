@@ -13,7 +13,7 @@ customElements.define(
         private timeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
         private getCurrentPage() {
-            const currentSlide = document.location.pathname.replace(/^\/mpa-with-astro/, "").replace(/\/$/, "");
+            const currentSlide = document.location.pathname.replace(/^\/mpa-with-astro/, "").replace(/(.)\/$/, "$1");
             return this.slidePaths.indexOf(currentSlide);
         }
 
