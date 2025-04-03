@@ -13,7 +13,7 @@ customElements.define(
         private timeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
         private getCurrentPage() {
-            return this.slidePaths.indexOf(document.location.pathname);
+            return this.slidePaths.indexOf(document.location.pathname.replace("/mpa-with-astro", ""));
         }
 
         connectedCallback() {
@@ -37,7 +37,9 @@ customElements.define(
         private setPage(page: number) {
             if (page >= this.slidePaths.length) page = this.slidePaths.length - 1;
             else if (page < 0) page = 0;
-            if (page !== this.getCurrentPage()) navigate(this.slidePaths[page]);
+            if (page !== this.getCurrentPage()) {
+                navigate(`/mpa-with-astro${this.slidePaths[page]}`);
+            }
         }
 
         private handleKeyDown(e: KeyboardEvent): boolean {
@@ -45,7 +47,7 @@ customElements.define(
             else if (PREV_PAGE_CODES.includes(e.code)) this.setPage(this.getCurrentPage() - 1);
             else if (e.code === "Home") this.setPage(0);
             else if (e.code === "End") this.setPage(this.slidePaths.length - 1);
-            else if (e.code === "KeyP") navigate("/print");
+            else if (e.code === "KeyP") navigate("/mpa-with-astro/print");
             else if (e.code === "Enter") {
                 if (document.fullscreenElement) document.exitFullscreen();
                 else document.documentElement.requestFullscreen();

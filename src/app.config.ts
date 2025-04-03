@@ -28,7 +28,7 @@ export const config: Config = {
     },
     speakers: [
         {
-            avatar: "/avatar.png",
+            avatar: "/mpa-with-astro/avatar.png",
             lines: ["Santo Pfingsten", "santo.pfingsten@jambit.com", "blog.lusito.info"],
         },
     ],

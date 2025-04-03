@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { background, bgBrightness, bgCredits, mode, logoMode, logoShadow, slideNumber, title, subTitle } = Astro.props;
-const backgroundImage = background ? `url(/backgrounds/${background})` : undefined;
+const backgroundImage = background ? `url(/mpa-with-astro/backgrounds/${background})` : undefined;
 const isPartialBackground = background?.startsWith("partial");
 const filter = bgBrightness ? `brightness(${bgBrightness});` : undefined;
 ---
