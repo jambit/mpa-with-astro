@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TitleSlide from "../components/TitleSlide.astro";
+
+import LastSlide from "../components/LastSlide.astro";
+import ContentSlide from "../components/ContentSlide.astro";
+import { getSlides } from "../utils/serverUtils";
+
+const slides = await getSlides();
+---
+
+<Layout>
+    <TitleSlide />
+    {slides.map((slide, i) => <ContentSlide {...slide.props} />)}
+    <LastSlide slideNumber={slides.length + 1} />
+</Layout>

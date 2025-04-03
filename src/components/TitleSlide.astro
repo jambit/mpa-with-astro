@@ -1,0 +1,18 @@
+---
+import { config } from "../app.config";
+import Screen from "./Screen.astro";
+
+const { speakers, presentation } = config;
+const { title, subTitle, city, date } = presentation;
+---
+
+<Screen background="full/box.jpeg" mode="dark" bgBrightness="60%">
+    <div class="flex-grow">
+        <div class="absolute w-full top-[65%] text-white">
+            <h1 class="pl-10 border-l-10 border-primary text-5xl">{title}</h1>
+            <h2 class="pl-10 text-2xl pt-2 border-l-10 border-transparent font-semibold">
+                {subTitle} | {date}, {city}, {speakers.map((v) => v.lines[0]).join(" / ")}
+            </h2>
+        </div>
+    </div>
+</Screen>

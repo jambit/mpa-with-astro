@@ -1,0 +1,13 @@
+---
+import { render } from "astro:content";
+import type { SlideCollectionEntry } from "../../utils/serverUtils";
+
+interface Props {
+    slide: SlideCollectionEntry;
+}
+
+const { slide } = Astro.props;
+const { Content } = await render(slide);
+---
+
+<Content />

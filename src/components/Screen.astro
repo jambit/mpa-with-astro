@@ -1,0 +1,46 @@
+---
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+
+interface Props {
+    mode: "dark" | "light";
+    logoMode?: "dark" | "light" | "alt";
+    logoShadow?: boolean;
+    background?: string;
+    bgBrightness?: string;
+    bgCredits?: string;
+    slideNumber?: number;
+    title?: string;
+    subTitle?: string;
+}
+
+const { background, bgBrightness, bgCredits, mode, logoMode, logoShadow, slideNumber, title, subTitle } = Astro.props;
+const backgroundImage = background ? `url(/backgrounds/${background})` : undefined;
+const isPartialBackground = background?.startsWith("partial");
+const filter = bgBrightness ? `brightness(${bgBrightness});` : undefined;
+---
+
+<slide-screen
+    class:list={[
+        "block relative w-full h-full",
+        "print:w-screen print:h-screen print:break-after-page",
+        mode === "dark" ? "bg-secondary" : "bg-white",
+    ]}
+>
+    <div class="relative w-[1280px] h-[720px] box-border flex flex-col inset-[50%] -translate-1/2">
+        {
+            !isPartialBackground && (
+                <div class="absolute bg-cover bg-center w-full h-full" style={{ backgroundImage, filter }} />
+            )
+        }
+        {title && <Header title={title} subTitle={subTitle} mode={mode} />}
+        <div class="flex flex-grow h-full z-1">
+            <div class="flex flex-col flex-grow pb-15 pt-35">
+                <slot />
+            </div>
+            {isPartialBackground && <div class="bg-cover bg-center w-[420px]" style={{ backgroundImage, filter }} />}
+        </div>
+        {bgCredits && <div class="absolute right-0 top-0 z-3 pt-2 pr-4 text-white">Bild: {bgCredits}</div>}
+        <Footer slideNumber={slideNumber} textMode={mode} logoMode={logoMode ?? mode} logoShadow={logoShadow} />
+    </div>
+</slide-screen>

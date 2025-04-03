@@ -1,0 +1,43 @@
+---
+import Screen from "./Screen.astro";
+import type { Slide } from "../utils/serverUtils";
+import ContentDefault from "./content-types/ContentDefault.astro";
+import ContentAgenda from "./content-types/ContentAgenda.astro";
+
+type Props = Slide["props"];
+
+const { slide, slideNumber } = Astro.props;
+const { title, subTitle, background, bgBrightness, bgCredits, mode, logoMode, logoShadow, type } = slide.data;
+const Content = type === "agenda" ? ContentAgenda : ContentDefault;
+---
+
+<Screen
+    slideNumber={slideNumber}
+    background={background}
+    bgBrightness={bgBrightness}
+    bgCredits={bgCredits}
+    mode={mode}
+    logoMode={logoMode}
+    logoShadow={logoShadow}
+    title={title}
+    subTitle={subTitle}
+>
+    <div
+        class:list={[
+            "flex-grow flex flex-col overflow-hidden px-8 mx-[10px] py-8 text-xl",
+            "prose !max-w-none",
+            "prose-ul:marker:text-primary prose-ul:list-inside [&>ul]:p-0",
+            "prose-ol:marker:text-primary prose-ol:list-inside [&>ol]:p-0",
+            "prose-li:my-1",
+            "prose-headings:text-primary prose-headings:m-0",
+            "prose-pre:not-last:mb-2 prose-pre:not-first:mt-2",
+            // workaround for no margin collapsing
+            "gap-4 prose-p:m-0 prose-ul:m-0 prose-ol:m-0 prose-li:last:mb-0 prose-li:first:mt-0",
+            mode === "dark" ? "text-white" : "text-secondary",
+            mode === "dark" ? "prose-code:text-white" : "",
+        ]}
+        data-theme={mode}
+    >
+        <Content {...Astro.props} />
+    </div>
+</Screen>

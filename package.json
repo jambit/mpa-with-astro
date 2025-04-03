@@ -1,0 +1,26 @@
+{
+  "name": "astro-presentation",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "start": "astro dev",
+    "lint": "prettier \"./**/*.{ts,tsx,js,css,scss,json,yml,md,astro}\" --ignore-path .lintignore --check && sort-package-json --check",
+    "lint:fix": "prettier \"./**/*.{ts,tsx,js,css,scss,json,yml,md,astro}\" --ignore-path .lintignore --write && sort-package-json",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.3",
+    "astro": "^5.2.3",
+    "tailwindcss": "^4.0.3",
+    "typeface-open-sans": "^1.1.13"
+  },
+  "devDependencies": {
+    "@lusito/prettier-config": "^3.2.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.5.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sort-package-json": "^2.15.0"
+  }
+}

@@ -1,0 +1,11 @@
+---
+interface Props {
+    slidePaths: string[];
+}
+
+const { slidePaths } = Astro.props;
+---
+
+<keyboard-navigation>
+    <script type="application/json" set:html={JSON.stringify(slidePaths)} />
+</keyboard-navigation>

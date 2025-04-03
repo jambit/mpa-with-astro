@@ -1,0 +1,33 @@
+---
+import type { SlideCollectionEntry } from "../../utils/serverUtils";
+
+interface Props {
+    slide: SlideCollectionEntry;
+    index: string;
+    agendaHeadings: string[];
+}
+
+const { slide, index, agendaHeadings } = Astro.props;
+const { mode } = slide.data;
+
+const textColor = mode === "dark" ? "text-white" : "text-secondary";
+const currentIndex = parseInt(index) - 1;
+---
+
+<ol class="list-none p-0">
+    {
+        agendaHeadings.map((text, i) => {
+            const isFocusItem = i === currentIndex;
+            return (
+                <li class="px-0 flex items-center pb-3">
+                    <div class:list={["text-4xl pr-3", isFocusItem ? "text-primary" : "text-faded"]}>
+                        {(i + 1).toString().padStart(2, "0")}
+                    </div>
+                    <div class:list={["text-xl", isFocusItem && "font-bold", isFocusItem ? textColor : "text-faded"]}>
+                        {text.replace(/^!/, "")}
+                    </div>
+                </li>
+            );
+        })
+    }
+</ol>

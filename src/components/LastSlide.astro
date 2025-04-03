@@ -1,0 +1,57 @@
+---
+import { config } from "../app.config";
+import Screen from "./Screen.astro";
+
+interface Props {
+    slideNumber: number;
+}
+
+const { slideNumber } = Astro.props;
+const { speakers, presentation } = config;
+const mode = "dark";
+const avatarSize = "130px";
+---
+
+<Screen mode="dark" slideNumber={slideNumber} title="Kontakt">
+    <div class="absolute left-0 bottom-0 flex flex-col p-10 pb-20 bg-dark text-white text-xs z-1">
+        <h2 class="text-3xl mb-2">{presentation.title}</h2>
+        <h3 class="text-base mb-10">{presentation.subTitle}</h3>
+        <div class="flex">
+            {
+                speakers.map(({ avatar, lines }) => (
+                    <div class="mb-8 mr-8">
+                        <img
+                            class="mb-4 rounded-full"
+                            width={avatarSize}
+                            height={avatarSize}
+                            alt="Avatar"
+                            src={avatar}
+                        />
+                        {lines.map((line, i) => (
+                            <div class:list={["text-base mb-1", i === 0 && "font-bold"]}>{line}</div>
+                        ))}
+                    </div>
+                ))
+            }
+        </div>
+        <div class="text-primary">{config.last.notice}</div>
+    </div>
+    <div class:list={["flex-grow relative", mode === "dark" ? "text-white" : "text-secondary"]}>
+        <div class="absolute right-0 bottom-0 text-xs flex flex-col place-content-end pb-6 w-[175px]">
+            <div class="mb-4">
+                {config.last.ownerLines.map((line, i) => <div>{line}</div>)}
+            </div>
+            {
+                config.last.locations.map((lines) => (
+                    <div class="mb-4">
+                        {lines.map((line) => (
+                            <div>{line}</div>
+                        ))}
+                    </div>
+                ))
+            }
+
+            {config.last.contactLines.map((line, i) => <div>{line}</div>)}
+        </div>
+    </div>
+</Screen>

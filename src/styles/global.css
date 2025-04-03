@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --color-primary: #ee7e00;
+    --color-secondary: #3c3c3b;
+    --color-faded: #d7d7d7;
+    --color-dark: #1e1e1d;
+    --footer-logo-size: 150px;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* Line numbers for Code blocks */
+pre {
+    @apply rounded-md pl-8;
+}
+
+pre code {
+    @apply block leading-tight p-2 pl-1;
+    font-size: 17px;
+    border-left: 1px solid rgba(115, 138, 148, 0.4);
+    counter-reset: step;
+    counter-increment: step 0;
+}
+
+pre code .line {
+    @apply relative;
+}
+
+pre code .line::before {
+    @apply absolute overflow-hidden w-7 h-4 -left-9 top-0 text-right;
+    content: counter(step);
+    counter-increment: step;
+    color: rgba(115, 138, 148, 0.4);
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::before {
+    content: "";
+}
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+    content: "";
+}
+
+.astro-code {
+    padding-block: 2px;
+}
+
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+}

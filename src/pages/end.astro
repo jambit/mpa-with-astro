@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { getSlides } from "../utils/serverUtils";
+import KeyboardNavigation from "../components/KeyboardNavigation.astro";
+import LastSlide from "../components/LastSlide.astro";
+
+const slides = await getSlides();
+const slidePaths = slides[0].props.slidePaths;
+---
+
+<Layout>
+    <LastSlide slideNumber={slides.length + 1} />
+    <KeyboardNavigation slidePaths={slidePaths} />
+</Layout>

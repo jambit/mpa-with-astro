@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TitleSlide from "../components/TitleSlide.astro";
+
+import { getSlides } from "../utils/serverUtils";
+import KeyboardNavigation from "../components/KeyboardNavigation.astro";
+
+const slides = await getSlides();
+const slidePaths = slides[0].props.slidePaths;
+---
+
+<Layout>
+    <TitleSlide />
+    <KeyboardNavigation slidePaths={slidePaths} />
+</Layout>

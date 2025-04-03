@@ -1,0 +1,43 @@
+---
+import { config } from "../app.config";
+
+interface Props {
+    slideNumber?: number;
+    textMode: "dark" | "light";
+    logoMode?: "dark" | "light" | "alt";
+    logoShadow?: boolean;
+}
+
+const { slideNumber, textMode, logoMode, logoShadow } = Astro.props;
+const { footerText } = config.presentation;
+// TODO: when partial backbround is positioned left, copyright & stuff needs to be positioned in the main area instead of next to the page count
+const backgroundImage = `url('/jambit-logo-footer-${logoMode}.svg')`;
+---
+
+<div
+    class:list={[
+        "absolute bottom-0 left-0 right-0 h-[55px] z-10 text-sm font-semibold",
+        "flex space-between justify-end items-center",
+        textMode === "dark" ? "text-white" : "text-secondary",
+    ]}
+>
+    {
+        slideNumber !== undefined && (
+            <>
+                <div class="w-15 ml-10">{slideNumber}</div>
+                <div class="info grow">{footerText}</div>
+            </>
+        )
+    }
+    <div
+        class:list={[
+            "logo mr-10 h-full bg-no-repeat bg-center",
+            "w-(--footer-logo-size) bg-(length:--footer-logo-size)",
+        ]}
+        style={{
+            backgroundImage,
+            filter: logoShadow ? "drop-shadow(black 1px 1px 3px)" : undefined,
+        }}
+    >
+    </div>
+</div>

@@ -1,0 +1,19 @@
+---
+interface Props {
+    title: string;
+    subTitle?: string;
+    mode: "dark" | "light";
+}
+
+const { title, subTitle, mode } = Astro.props;
+---
+
+<div
+    class:list={[
+        "absolute pl-8 font-semibold mt-12 border-l-10 border-primary",
+        mode === "dark" ? "text-white" : "text-secondary",
+    ]}
+>
+    <h1 class="leading-none text-5xl">{title}</h1>
+    {subTitle && <h2 class="leading-none text-2xl mt-2">{subTitle}</h2>}
+</div>
