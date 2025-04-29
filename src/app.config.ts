@@ -45,6 +45,6 @@ export const config: Config = {
             ["6/4 Abelyan Street", "Yerevan 0038", "Armenia"],
         ],
         contactLines: ["office@jambit.com", "www.jambit.com"],
-        notice: "Dieses Dokument ist vertraulich. Eine Weitergabe an Dritte ist nur mit Zustimmung von jambit gestattet.",
+        notice: "", // "Dieses Dokument ist vertraulich. Eine Weitergabe an Dritte ist nur mit Zustimmung von jambit gestattet.",
     },
 };

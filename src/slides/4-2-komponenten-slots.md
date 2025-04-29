@@ -4,7 +4,7 @@ subTitle: Komponenten Slots
 mode: dark
 ---
 
-Wenn die Parent-Komponente Slots definiert:
+Wenn eine Komponente Slots definiert:
 
 ```astro
 <div class="card">
